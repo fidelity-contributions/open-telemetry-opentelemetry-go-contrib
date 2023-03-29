@@ -63,3 +63,5 @@ $message"
 git push origin $PR_NAME
 
 gh pr create --title "[chore] dependabot updates `date`" --body "$message"
+
+gh pr create --title "[chore] dependabot updates `date`" --body "$message"
