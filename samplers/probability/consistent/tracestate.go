@@ -192,13 +192,17 @@ func parseNumber(key string, input string, maximum uint8) (uint8, error) {
 		return maximum + 1, nil
 	}
 	value, err := strconv.ParseUint(input, 10, 64)
+	convertedValue := uint8(value)
 	if err != nil {
 		return maximum + 1, parseError(key, err)
 	}
 	if value > uint64(maximum) {
 		return maximum + 1, parseError(key, strconv.ErrRange)
 	}
-	return uint8(value), nil
+	if convertedValue > maximum {
+		return maximum + 1, parseError(key, strconv.ErrRange)
+	}
+	return convertedValue, nil
 }
 
 func parseError(key string, err error) error {
